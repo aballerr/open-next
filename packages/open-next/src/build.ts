@@ -118,10 +118,9 @@ function injectMiddlewareGeolocation(outputPath: string, packagePath: string) {
   const basePath = path.join(outputPath, packagePath, ".next", "server");
   const rootMiddlewarePath = path.join(basePath, "middleware.js");
   const srcMiddlewarePath = path.join(basePath, "src", "middleware.js");
-  if (fs.existsSync(rootMiddlewarePath)) {
+
+  if (fs.existsSync(rootMiddlewarePath) || fs.existsSync(srcMiddlewarePath)) {
     inject(rootMiddlewarePath);
-  } else if (fs.existsSync(srcMiddlewarePath)) {
-    inject(srcMiddlewarePath);
   }
 
   function inject(middlewarePath: string) {
